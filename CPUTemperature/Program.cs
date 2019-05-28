@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HardwareProviders.CPU;
+using System;
 
 namespace CPUTemperature
 {
@@ -10,6 +7,21 @@ namespace CPUTemperature
     {
         static void Main(string[] args)
         {
+            var measurement = "cpu_temperature";
+
+            var cpus = Cpu.Discover();
+
+            int corecount, cpucount = 0;
+            foreach (var cpu in cpus)
+            {
+                corecount = 0;
+                foreach (var core in cpu.CoreTemperatures)
+                {
+                    Console.WriteLine($"{measurement},cpu={cpucount},core={corecount} max={core.Max},min={core.Min},value={core.Value}");
+                    corecount++;
+                }
+                cpucount++;
+            }
         }
     }
 }
