@@ -1,0 +1,2 @@
+# CPUTemperature
+CPU温度を取得してTelegraf用フォーマットで出力するプログラム
